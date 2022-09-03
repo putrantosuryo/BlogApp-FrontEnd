@@ -1,6 +1,7 @@
 import axios from "axios";
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { Form, FormGroup, Label, Input, Button,Container } from "reactstrap";
 
 function Register(props) {
   const [values, setValues] = useState({
@@ -31,39 +32,44 @@ function Register(props) {
 
   return (
     <>
-      <div>
+
+        <Container fluid="sm" id="formApp">
         <h1> REGISTRATION PAGE </h1>
-      </div>
-      <div>
-        <form onSubmit={handleSubmit}>
-          <label>fullname</label>
-          <input
-            name="fullname"
-            id="fullname"
-            placeholder="Fullname"
-            onChange={handleOnChange}
-          ></input>
-          <br />
-          <label>username</label>
-          <input
-            name="username"
-            id="username"
-            placeholder="Username"
-            onChange={handleOnChange}
-          ></input>
-          <br />
-          <label>pasword</label>
-          <input
-            name="password"
-            id="password"
-            placeholder="Password"
-            type="text"
-            onChange={handleOnChange}
-          ></input>
-          <br />
-          <button type="submit">Sign Up</button>
-        </form>
-      </div>
+        <Form onSubmit={handleSubmit}>
+          <FormGroup floating>
+            <Input
+              name="fullname"
+              id="fullname"
+              placeholder="Fullname"
+              onChange={handleOnChange}
+            ></Input>
+            <Label>fullname</Label>
+          </FormGroup>
+          <FormGroup floating>
+            <Input
+              name="username"
+              id="username"
+              placeholder="Username"
+              onChange={handleOnChange}
+            ></Input>
+            <Label>username</Label>
+          </FormGroup>
+          <FormGroup floating>
+            <Input
+              name="password"
+              id="password"
+              placeholder="Password"
+              type="text"
+              onChange={handleOnChange}
+            ></Input>
+            <Label>pasword</Label>
+          </FormGroup>
+          <FormGroup>
+            <Button color="primary" type="submit">Sign Up</Button>
+          </FormGroup>
+        </Form>
+        </Container>
+
     </>
   );
 }

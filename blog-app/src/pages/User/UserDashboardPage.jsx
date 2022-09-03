@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useCookies } from "react-cookie";
 import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
-import { Row } from "reactstrap";
+import { Row, Button } from "reactstrap";
 import CardTemplate from "../../component/CardPost";
 
 const UserDashboard = () => {
@@ -37,11 +37,12 @@ const UserDashboard = () => {
   const [posts, setPosts] = useState([]);
   return (
     <>
-      <div>
+      <Row id="row">
+        <h1>DASHBOARD USER</h1>
         <Link to="/CreatePost">
-          <button> Create Post </button>
+          <Button> Create Post </Button>
         </Link>
-      </div>
+      </Row>
       <div>
         <Row xs="4" id="row">
           {posts.map((data) => {
@@ -57,9 +58,8 @@ const UserDashboard = () => {
                 color={"#" + randomColor}
                 title={title}
                 content={content}
-                image = {image}
-              >
-              </CardTemplate>
+                image={image}
+              ></CardTemplate>
             );
           })}
         </Row>

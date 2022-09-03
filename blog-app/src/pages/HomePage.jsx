@@ -23,9 +23,6 @@ const Home = () => {
   return (
     <>
       <div>
-        <Row id="row">
-          <h3>Artikel</h3>
-        </Row>
         <Row xs="4" id="row">
           {posts.map((data) => {
             const randomColor = ((Math.random() * 0xffffff) << 0).toString(16);

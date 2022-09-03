@@ -10,10 +10,10 @@ function CardPost(props) {
 
   let tempButton;
   let tempBody;
+  let tempButtonDasBoard;
   if (source !== "Home") {
     if (cookies.accessToken) {
       tempButton = (
-       
         <Link
           to="/EditPost"
           state={{
@@ -23,23 +23,30 @@ function CardPost(props) {
             tempId: id,
           }}
         >
-           <reactStrap.Button>Edit Post </reactStrap.Button>
+          <reactStrap.Button>Edit Post </reactStrap.Button>
         </Link>
-      
       );
-    };
-  }else{
+      tempButtonDasBoard = (
+        <Link
+          to="/DetailPost"
+          state={{
+            postId: id,
+          }}
+        >
+          <reactStrap.Button id="buttonPad">Detail Post</reactStrap.Button>
+        </Link>
+      );
+    }
+  } else {
     tempButton = (
-      
       <Link
         to="/DetailPost"
         state={{
           postId: id,
         }}
       >
-        <reactStrap.Button>Detail Post </reactStrap.Button>
+        <reactStrap.Button id="buttonPad">Detail Post </reactStrap.Button>
       </Link>
-     
     );
   }
 
@@ -62,18 +69,21 @@ function CardPost(props) {
           }}
           id={id}
         >
-          <img alt="Card cap" src={image} width="23%" />
+          <img alt="Card cap" src={image} style={{width:"300px",height:"200px",position:"relative",left:"16%",marginBottom:"10px"}} />
           <reactStrap.CardTitle tag="h5">{title}</reactStrap.CardTitle>
           {tempBody}
-          <reactStrap.Button
-          style={{marginBottom:"5px"}}
-            onClick={() => {
-              setTemp("#" + ((Math.random() * 0xffffff) << 0).toString(16));
-            }}
-          >
-            Change Card Color
-          </reactStrap.Button>
-          {tempButton}
+          <reactStrap.CardBody style={{padding:"0"}}>
+            {tempButton}
+            {tempButtonDasBoard}
+            <reactStrap.Button
+            id="buttonPad"
+              onClick={() => {
+                setTemp("#" + ((Math.random() * 0xffffff) << 0).toString(16));
+              }}
+            >
+              Change Card Color
+            </reactStrap.Button>
+          </reactStrap.CardBody>
         </reactStrap.Card>
       </reactStrap.Col>
     </>

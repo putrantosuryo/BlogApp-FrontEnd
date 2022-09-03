@@ -2,10 +2,16 @@ import { useState, React, useEffect } from "react";
 import { useLocation } from "react-router-dom";
 import axios from "axios";
 
-import { Row } from "reactstrap";
-import CardTemplate from "../../component/CardPost";
+import {
+  Row,
+  Card,
+  CardImg,
+  CardBody,
+  CardTitle,
+  CardText,
+  Container,
+} from "reactstrap";
 import { useNavigate } from "react-router-dom";
-
 
 const DetailPost = () => {
   const location = useLocation();
@@ -17,8 +23,8 @@ const DetailPost = () => {
     axios
       .get(`http://localhost:8001/blogApp.com/post/${postId}`)
       .then((res) => {
-        if(!res.data){
-          alert("Error")
+        if (!res.data) {
+          alert("Error");
           navigate("/Home");
         }
         setPosts(res.data);
@@ -36,27 +42,29 @@ const DetailPost = () => {
   let detail = true;
   return (
     <>
-      <div>
-        <Row id="row">
-          <h3>Artikel</h3>
-        </Row>
-        <Row xs="4" id="row">
-          <CardTemplate
-            key={key}
-            color={"#" + randomColor}
-            title={title}
-            content={content}
-            image = {image}
-            source={source}
-            detail={detail}
-          ></CardTemplate>
-        </Row>
+      <Container fluid="md" id="detailPost">
         <Row>
-          <h1>{title}</h1>
-          <img alt="Card cap" src={image} width="auto" />
-          <p>{content}</p>
+          <Card className="my-2">
+            <CardTitle tag="h3">{title}</CardTitle>
+            <CardImg
+              alt="Card image cap"
+              src={image}
+              style={{
+
+              }}
+              top
+            />
+            <CardBody>
+              <CardText style={{ height: "400px" }}>{content}</CardText>
+              <CardText>
+                <small className="text-muted">
+                  Created At {posts.createdAt}
+                </small>
+              </CardText>
+            </CardBody>
+          </Card>
         </Row>
-      </div>
+      </Container>
     </>
   );
 };
