@@ -22,6 +22,7 @@ function Login(props) {
         setCookies("accessToken", accessToken, { maxAge: 60000 });
         setCookies("userId", userId, { maxAge: 60000 });
         setCookies("username", username, { maxAge: 60000 });
+        alert("Welcome Back " +username)
         navigate("/UserDashboard");
       })
       .catch((err) => alert(" Wrong Username or Password !"));

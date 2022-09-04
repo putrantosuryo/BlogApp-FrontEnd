@@ -2,7 +2,7 @@ import axios from "axios";
 import React, { useState } from "react";
 import { useNavigate, useLocation } from "react-router-dom";
 import { useCookies } from "react-cookie";
-import { Form, FormGroup, Label, Input, Button, Container } from "reactstrap";
+import { Form, FormGroup, Label, Input, Button, Container,CloseButton } from "reactstrap";
 
 function EditPost() {
   const location = useLocation();
@@ -37,8 +37,11 @@ function EditPost() {
   return (
     <>
       <Container fluid="sm" id="formApp">
+      <div style={{display:"inline-flex"}}>
         <h1>EDIT POST</h1>
-
+        <CloseButton style={{position:"absolute",top:"2%",right:"1%"}} onClick={()=>{
+          navigate("/UserDashboard")}} />
+        </div>
         <Form onSubmit={handleSubmit}>
           <FormGroup floating>
             <Input

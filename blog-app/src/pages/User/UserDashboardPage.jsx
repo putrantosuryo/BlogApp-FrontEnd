@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useCookies } from "react-cookie";
 import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
-import { Row, Button } from "reactstrap";
+import { Row, Button,CardBody } from "reactstrap";
 import CardTemplate from "../../component/CardPost";
 
 const UserDashboard = () => {
@@ -39,9 +39,11 @@ const UserDashboard = () => {
     <>
       <Row id="row">
         <h1>DASHBOARD USER</h1>
+        <CardBody style={{marginLeft:"10px"}}>
         <Link to="/CreatePost">
           <Button> Create Post </Button>
         </Link>
+        </CardBody>
       </Row>
       <div>
         <Row xs="4" id="row">

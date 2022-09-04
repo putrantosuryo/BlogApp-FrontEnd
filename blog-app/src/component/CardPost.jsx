@@ -11,6 +11,7 @@ function CardPost(props) {
   let tempButton;
   let tempBody;
   let tempButtonDasBoard;
+  let tempTitle;
   if (source !== "Home") {
     if (cookies.accessToken) {
       tempButton = (
@@ -26,6 +27,7 @@ function CardPost(props) {
           <reactStrap.Button>Edit Post </reactStrap.Button>
         </Link>
       );
+      tempTitle = <reactStrap.CardTitle tag="h5">{title}</reactStrap.CardTitle>;
       tempButtonDasBoard = (
         <Link
           to="/DetailPost"
@@ -48,6 +50,7 @@ function CardPost(props) {
         <reactStrap.Button id="buttonPad">Detail Post </reactStrap.Button>
       </Link>
     );
+    tempTitle = <reactStrap.CardTitle style={{marginLeft:"10px"}} tag="h5">{title}</reactStrap.CardTitle>;
   }
 
   if (detail) {
@@ -69,14 +72,24 @@ function CardPost(props) {
           }}
           id={id}
         >
-          <img alt="Card cap" src={image} style={{width:"300px",height:"200px",position:"relative",left:"16%",marginBottom:"10px"}} />
-          <reactStrap.CardTitle tag="h5">{title}</reactStrap.CardTitle>
+          <img
+            alt="Card cap"
+            src={image}
+            style={{
+              width: "300px",
+              height: "200px",
+              position: "relative",
+              left: "16%",
+              marginBottom: "10px",
+            }}
+          />
+          {tempTitle}
           {tempBody}
-          <reactStrap.CardBody style={{padding:"0"}}>
+          <reactStrap.CardBody style={{ padding: "0" }}>
             {tempButton}
             {tempButtonDasBoard}
             <reactStrap.Button
-            id="buttonPad"
+              id="buttonPad"
               onClick={() => {
                 setTemp("#" + ((Math.random() * 0xffffff) << 0).toString(16));
               }}

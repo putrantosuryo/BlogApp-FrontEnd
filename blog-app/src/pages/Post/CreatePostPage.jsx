@@ -1,8 +1,16 @@
 import axios from "axios";
 import React, { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { useHref, useNavigate } from "react-router-dom";
 import { useCookies } from "react-cookie";
-import { Form, FormGroup, Label, Input, Button, Container } from "reactstrap";
+import {
+  Form,
+  FormGroup,
+  Label,
+  Input,
+  Button,
+  Container,
+  CloseButton,
+} from "reactstrap";
 
 function CreatePost() {
   const [values, setValues] = useState({
@@ -37,7 +45,12 @@ function CreatePost() {
   return (
     <>
       <Container fluid="sm" id="formApp">
+        <div style={{display:"inline-flex"}}>
         <h1>CREATE POST</h1>
+        <CloseButton style={{position:"absolute",top:"2%",right:"1%"}} onClick={()=>{
+          navigate("/UserDashboard")}} />
+        </div>
+       
         <Form onSubmit={handleSubmit}>
           <FormGroup floating>
             <Input
@@ -65,7 +78,7 @@ function CreatePost() {
               onChange={handleOnChange}
               type="textarea"
               maxLength={"255"}
-              style={{height:"400px"}}
+              style={{ height: "400px" }}
             ></Input>
             <Label>Body Article *Maximal 255 Character</Label>
             <Input

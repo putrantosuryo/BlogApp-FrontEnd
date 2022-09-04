@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-import { Link } from "react-router-dom";
 import {
   NavbarBrand,
   Navbar,
@@ -9,16 +8,67 @@ import {
   DropdownToggle,
   DropdownMenu,
   NavLink,
+  Label,
 } from "reactstrap";
-import ModalTemplate from "../component/ModalTemplate";
+import { useCookies } from "react-cookie";
 
 function NavbarTemplate() {
   const [dropdownOpen, setDropdownOpen] = useState(false);
   const toggle = () => setDropdownOpen(!dropdownOpen);
+  const [cookies] = useCookies(["accessToken", "userId", "username"]);
+  let menu;
+  if (!cookies.accessToken) {
+    menu = (
+      <>
+        <DropdownItem>
+          <NavLink active href="/Login">
+            Login
+          </NavLink>
+        </DropdownItem>
+        <DropdownItem>
+          <NavLink active href="/Register">
+            Sign Up
+          </NavLink>
+        </DropdownItem>
+        <DropdownItem divider />
+        <DropdownItem disabled id="userDasboard">
+          <NavItem>
+            <NavLink href="/UserDashboard">User Dashboard</NavLink>
+          </NavItem>
+        </DropdownItem>
+      </>
+    );
+  } else {
+    menu = (
+      <>
+        <DropdownItem>
+          <NavLink
+            onClick={() => {
+              document.cookie =
+                "accessToken=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
+              document.cookie =
+                "userId=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
+              document.cookie =
+                "username=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
+              window.location.reload();
+            }}
+          >
+            Logout
+          </NavLink>
+        </DropdownItem>
+        <DropdownItem divider />
+        <DropdownItem>
+          <NavItem>
+            <NavLink href="/UserDashboard">User Dashboard</NavLink>
+          </NavItem>
+        </DropdownItem>
+      </>
+    );
+  }
 
   return (
     <>
-      <Navbar className="my-0" color="secondary" dark>
+      <Navbar sticky="top" className="my-0" color="secondary" dark>
         <NavbarBrand href="/">
           <img
             alt="logo"
@@ -34,73 +84,17 @@ function NavbarTemplate() {
         <NavbarBrand>
           <Dropdown isOpen={dropdownOpen} toggle={toggle}>
             <DropdownToggle nav>
+              <Label style={{marginRight:"10px"}}>{cookies.username}</Label>
               <img
                 style={{ width: "30px", height: "30px" }}
                 src="https://upload.wikimedia.org/wikipedia/commons/thumb/7/7c/User_font_awesome.svg/1200px-User_font_awesome.svg.png"
-                alt=""
+                alt="UserManagement"
               />
             </DropdownToggle>
-            <DropdownMenu>
-              <DropdownItem>
-                <NavLink active href="/Login">
-                Login
-                </NavLink>
-              </DropdownItem>
-              <DropdownItem>
-                <NavLink active href="/Register">
-                Register
-                </NavLink>
-              </DropdownItem>
-              <DropdownItem divider />
-              <DropdownItem>
-                <NavItem>
-                  <NavLink href="/UserDashboard">
-                  User Dashboard
-                  </NavLink>
-                </NavItem>
-              </DropdownItem>
-            </DropdownMenu>
+            <DropdownMenu>{menu}</DropdownMenu>
           </Dropdown>
         </NavbarBrand>
       </Navbar>
-      {/* <Nav>
-        <NavItem>
-          <NavLink active>
-            <Link to="/Home">Home</Link>
-          </NavLink>
-        </NavItem>
-        <NavItem>
-          <Dropdown nav isOpen={dropdownOpen} toggle={toggle}>
-            <DropdownToggle nav>
-              <img
-                style={{ width: "30px", height: "30px" }}
-                src="https://upload.wikimedia.org/wikipedia/commons/thumb/7/7c/User_font_awesome.svg/1200px-User_font_awesome.svg.png"
-                alt=""
-              />
-            </DropdownToggle>
-            <DropdownMenu>
-              <DropdownItem>
-                <NavLink active>
-                  <Link to="/Login">Login</Link>
-                </NavLink>
-              </DropdownItem>
-              <DropdownItem>
-                <NavLink active>
-                  <Link to="/Register">Register</Link>
-                </NavLink>
-              </DropdownItem>
-              <DropdownItem divider />
-              <DropdownItem>
-                <NavItem>
-                  <NavLink>
-                    <Link to="/UserDashboard">User Dashboard</Link>
-                  </NavLink>
-                </NavItem>
-              </DropdownItem>
-            </DropdownMenu>
-          </Dropdown>
-        </NavItem>
-      </Nav> */}
     </>
   );
 }
